@@ -62,10 +62,10 @@ const toggleDrawer = () => {
 <template>
   <q-layout view="lHh Lpr lFf">
     <HeaderDesktop
-      v-if="$q.screen.gt.xs"
+      v-if="$q.screen.gt.sm"
     />
     <HeaderMobile
-      v-if="$q.screen.lt.sm"
+      v-if="$q.screen.lt.md"
       :toggleDrawer="toggleDrawer"
     />
 

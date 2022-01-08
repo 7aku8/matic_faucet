@@ -1,11 +1,13 @@
 <template>
-  <q-page class="row items-center justify-evenly">
+  <q-page :style-fn="pageHeight" class="bg-secondary row items-center justify-evenly">
+    <div style="max-width: 1200px;">
     <example-component
       title="Example component"
       active
       :todos="todos"
       :meta="meta"
     ></example-component>
+    </div>
   </q-page>
 </template>
 
@@ -43,7 +45,10 @@ export default defineComponent({
     const meta = ref<Meta>({
       totalCount: 1200
     })
-    return { todos, meta }
+    const pageHeight = () => {
+      return { height: '100vh' }
+    }
+    return { todos, meta, pageHeight }
   }
 })
 </script>
