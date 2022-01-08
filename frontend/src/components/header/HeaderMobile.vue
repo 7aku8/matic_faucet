@@ -26,7 +26,7 @@ const props = defineProps({
         aria-label="Menu"
         @click="props.toggleDrawer"
       >
-          <q-icon name="las la-bars" color="primary" />
+        <q-icon name="las la-bars" color="primary" />
       </q-btn>
     </q-toolbar>
   </q-header>

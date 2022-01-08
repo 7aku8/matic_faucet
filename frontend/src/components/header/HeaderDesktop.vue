@@ -1,10 +1,25 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
+
+const scrolled = ref(false)
+
+const checkScroll = ({ position: { top } }: { position: { top: number } }) => {
+  scrolled.value = top > 150
+}
 </script>
 
 <template>
-  <q-header bordered class="bg-transparent align-center justify-center row">
+  <q-header
+    class="bg-transparent align-center justify-center row"
+    :class="[scrolled ? 'nav-background' : 'bg-transparent']"
+    style="transition: background-color 250ms 200ms ease-out;"
+  >
     <div style="max-width: 1250px" class="full-width">
-      <q-toolbar class="q-py-lg q-px-xl">
+      <q-toolbar
+        class="q-px-xl"
+        :class="[scrolled ? 'q-py-lg' : 'q-py-xl']"
+        style="transition: padding 250ms ease-out;"
+      >
         <q-avatar square>
           <q-img src="../../assets/matic_logo.svg" style="width: 120px; max-height: 120px;"/>
         </q-avatar>
@@ -12,17 +27,19 @@
           <h1 class="text-h6 text-weight-bold text-primary">Matic Faucet</h1>
         </q-toolbar-title>
 
-        <q-tabs align="left" class="text-accent" no-caps :narrow-indicator="true">
-          <q-route-tab to="#" label="Page One" rounded/>
+        <q-tabs align="left" class="text-accent" no-caps dense :narrow-indicator="true">
+          <q-route-tab to="#" label="Page One" />
           <q-route-tab to="/404" label="Page Two"/>
           <q-route-tab to="/faucet" label="Page Three"/>
         </q-tabs>
 
         <q-btn size="md" outline rounded class="q-py-sm q-px-lg q-ml-lg" color="primary">
           <q-icon name="las la-wallet" class="q-pr-sm" />
-          Connect wallet
+          <span class="text-subtitle1 text-bold">Connect wallet</span>
         </q-btn>
       </q-toolbar>
     </div>
+
+    <q-scroll-observer axis="vertical" scroll-target="body" @scroll="checkScroll" />
   </q-header>
 </template>

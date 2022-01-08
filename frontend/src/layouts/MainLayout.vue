@@ -71,7 +71,7 @@ const toggleDrawer = () => {
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above="false"
+      :show-if-above="false"
       bordered
     >
       <q-list>
