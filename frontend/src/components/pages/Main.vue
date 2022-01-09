@@ -1,5 +1,16 @@
 <script lang="ts" setup>
 import GetStartedButton from 'components/common/GetStartedButton.vue'
+import BeeAnimation from 'components/animations/BeeAnimation.vue'
+import { ref, watch } from 'vue'
+
+const logoContainerWidth = ref<number>(0)
+
+const logoContainer = ref<HTMLElement|null>(null)
+watch(logoContainer, () => { if (!logoContainerWidth.value) { logoContainerWidth.value = (logoContainer.value as HTMLElement).clientWidth } })
+
+const setLogoContainerWidth = ({ width }: { width: number }) => {
+  logoContainerWidth.value = width
+}
 
 const pageHeight = () => {
   return { height: '100vh' }
@@ -32,10 +43,13 @@ const pageHeight = () => {
                 </div>
               </div>
               <div
-                class="col-xs-12 col-md-6"
+                ref="logoContainer"
+                class="col-xs-12 col-md-6 content-center justify-center row"
                 :class="{ 'order-first': $q.screen.lt.md}"
               >
-                <p class="text-h3 text-accent">obrazek</p>
+                <BeeAnimation :key="Math.floor(logoContainerWidth / 150)" :width="logoContainerWidth" :height="logoContainerWidth" />
+
+                <q-resize-observer @resize="setLogoContainerWidth" />
               </div>
             </div>
           </div>
