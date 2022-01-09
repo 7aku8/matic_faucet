@@ -66,7 +66,7 @@ const pageHeight = () => {
                 :class="[$q.screen.lt.md ? 'order-first content-end full-width' : null]"
               >
                 <BeeAnimation
-                  :key="Math.floor($q.screen.width / 150)"
+                  :key="Math.floor($q.screen.width / 150).toString() + logoContainerSize.width.toString()"
                   :width="$q.screen.lt.md ? logoContainerSize.height - 50 : logoContainerSize.width"
                   :height="$q.screen.lt.md ? logoContainerSize.height - 50 : logoContainerSize.width"
                 />
