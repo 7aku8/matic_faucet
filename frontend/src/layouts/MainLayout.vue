@@ -1,55 +1,27 @@
 <script lang="ts" setup>
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
 import { ref } from 'vue'
 import HeaderDesktop from 'components/header/HeaderDesktop.vue'
 import HeaderMobile from 'components/header/HeaderMobile.vue'
 import { useStore } from 'src/store'
+import { MenuItem } from 'components/models'
+
+const linksList: MenuItem[] = [
+  {
+    name: 'Faucet',
+    id: '#',
+    icon: 'school'
+  },
+  {
+    name: 'How it works',
+    id: 'github.com/quasarframework',
+    icon: 'code'
+  },
+  {
+    name: 'About',
+    id: '',
+    icon: 'wallet'
+  }
+]
 
 const store = useStore()
 const setScrollPosition = ({ verticalPosition }: { verticalPosition: number }) => {
@@ -78,21 +50,44 @@ const toggleDrawer = () => {
     <q-drawer
       v-model="leftDrawerOpen"
       :show-if-above="false"
-      bordered
+      dark
+      mini
+      side="left"
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
+      <div class="q-py-xl q-px-md">
+        <q-item-label>
+          <q-toolbar>
+            <q-avatar square>
+              <q-img src="../assets/matic_logo.svg"/>
+            </q-avatar>
+            <q-toolbar-title>
+              <h1 class="text-h6 text-weight-bold text-primary">Matic Faucet</h1>
+            </q-toolbar-title>
+          </q-toolbar>
         </q-item-label>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
+        <q-tabs
+          class="q-pt-md q-px-sm justify-start"
+          :switch-indicator="true"
+          vertical
+          no-caps
+        >
+          <q-route-tab
+            v-for="link in essentialLinks"
+            :key="link.name"
+            :to="link.id"
+            style="justify-content: start;"
+            class="q-px-md q-my-sm"
+          >
+            <span class="q-pl-md">{{ link.name }}</span>
+          </q-route-tab>
+        </q-tabs>
+
+        <q-btn size="md" outline rounded class="q-py-sm q-px-lg q-ml-md q-mt-lg" color="primary">
+          <q-icon name="las la-wallet" class="q-pr-sm" />
+          <span class="text-subtitle1 text-bold">Connect wallet</span>
+        </q-btn>
+      </div>
     </q-drawer>
 
     <q-page-container>
@@ -100,7 +95,7 @@ const toggleDrawer = () => {
         @scroll="setScrollPosition"
         style="height: 100vh; width: 100vw;"
       >
-        <router-view />
+        <router-view/>
       </q-scroll-area>
     </q-page-container>
   </q-layout>

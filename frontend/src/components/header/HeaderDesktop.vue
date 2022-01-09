@@ -10,7 +10,7 @@ const scrolled = computed<boolean>(() => store.getters['common/getScrollPosition
 
 <template>
   <q-header
-    class="bg-transparent align-center justify-center row"
+    class="align-center justify-center row"
     :class="[scrolled ? 'nav-background' : 'bg-transparent']"
     style="transition: background-color 250ms 200ms ease-out;"
   >

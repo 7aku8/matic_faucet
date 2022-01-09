@@ -1,5 +1,11 @@
 <script lang="ts" setup>
-import { defineProps } from 'vue'
+import { defineProps, computed } from 'vue'
+import { useStore } from 'src/store'
+
+const store = useStore()
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+const scrolled = computed<boolean>(() => store.getters['common/getScrollPosition'] > 100)
 
 const props = defineProps({
   toggleDrawer: {
@@ -10,7 +16,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <q-header class="bg-transparent">
+  <q-header
+    :class="[scrolled ? 'nav-background' : 'bg-transparent']"
+    style="transition: background-color 250ms 200ms ease-out;"
+  >
     <q-toolbar class="q-pl-lg q-pr-md q-py-sm">
       <q-avatar square>
         <q-img src="../../assets/matic_logo.svg" style="width: 50px; max-height: 50px;"/>
