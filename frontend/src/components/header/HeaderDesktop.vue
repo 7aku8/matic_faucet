@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, toRefs, defineProps } from 'vue'
 import { useStore } from 'src/store'
+import GetStartedButton from 'components/common/GetStartedButton.vue'
 
 const props = defineProps({
   menuItems: {
@@ -45,10 +46,7 @@ const scrolled = computed<boolean>(() => store.getters['common/getScrollPosition
           />
         </q-tabs>
 
-        <q-btn size="md" outline rounded class="q-py-sm q-px-lg q-ml-lg" color="primary">
-          <q-icon name="las la-wallet" class="q-pr-sm" />
-          <span class="text-subtitle1 text-bold">Connect wallet</span>
-        </q-btn>
+        <GetStartedButton class="q-ml-xl" />
       </q-toolbar>
     </div>
   </q-header>

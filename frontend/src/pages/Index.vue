@@ -1,16 +1,8 @@
 <script lang="ts" setup>
-const pageHeight = () => {
-  return { height: '160vh' }
-}
+import Main from 'components/pages/Main.vue'
 </script>
 
 <template>
-  <q-page
-    :style-fn="pageHeight"
-    class="bg-secondary row items-center justify-evenly"
-  >
-    <div style="max-width: 1200px;">
-
-    </div>
-  </q-page>
+  <Main />
+  <q-page :style-fn="() => { return { height: '100vh'}}">asdfljashdflaksdjhfalksfjhalksfjasd</q-page>
 </template>
