@@ -41,6 +41,7 @@ const toggleDrawer = () => {
   <q-layout view="lHh Lpr lFf">
     <HeaderDesktop
       v-if="$q.screen.gt.sm"
+      :menuItems="essentialLinks"
     />
     <HeaderMobile
       v-if="$q.screen.lt.md"

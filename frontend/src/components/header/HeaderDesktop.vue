@@ -1,6 +1,15 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, toRefs, defineProps } from 'vue'
 import { useStore } from 'src/store'
+
+const props = defineProps({
+  menuItems: {
+    type: Array,
+    required: true
+  }
+})
+
+const { menuItems } = toRefs(props)
 
 const store = useStore()
 
@@ -28,9 +37,12 @@ const scrolled = computed<boolean>(() => store.getters['common/getScrollPosition
         </q-toolbar-title>
 
         <q-tabs align="left" class="text-accent" no-caps dense :narrow-indicator="true">
-          <q-route-tab to="#" label="Page One" />
-          <q-route-tab to="/404" label="Page Two"/>
-          <q-route-tab to="/faucet" label="Page Three"/>
+          <q-route-tab
+            v-for="item in menuItems"
+            :key="item.name"
+            :to="item.id"
+            :label="item.name"
+          />
         </q-tabs>
 
         <q-btn size="md" outline rounded class="q-py-sm q-px-lg q-ml-lg" color="primary">
