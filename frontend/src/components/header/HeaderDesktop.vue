@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'src/store'
 
-const scrolled = ref(false)
+const store = useStore()
 
-const checkScroll = ({ position: { top } }: { position: { top: number } }) => {
-  scrolled.value = top > 150
-}
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+const scrolled = computed<boolean>(() => store.getters['common/getScrollPosition'] > 150)
 </script>
 
 <template>
@@ -39,7 +39,5 @@ const checkScroll = ({ position: { top } }: { position: { top: number } }) => {
         </q-btn>
       </q-toolbar>
     </div>
-
-    <q-scroll-observer axis="vertical" scroll-target="body" @scroll="checkScroll" />
   </q-header>
 </template>

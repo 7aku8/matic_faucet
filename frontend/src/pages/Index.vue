@@ -1,5 +1,8 @@
 <template>
-  <q-page :style-fn="pageHeight" class="bg-secondary row items-center justify-evenly">
+  <q-page
+    :style-fn="pageHeight"
+    class="bg-secondary row items-center justify-evenly"
+  >
     <div style="max-width: 1200px;">
     <example-component
       title="Example component"

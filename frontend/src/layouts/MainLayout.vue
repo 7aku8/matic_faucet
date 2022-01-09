@@ -49,6 +49,12 @@ const linksList = [
 import { ref } from 'vue'
 import HeaderDesktop from 'components/header/HeaderDesktop.vue'
 import HeaderMobile from 'components/header/HeaderMobile.vue'
+import { useStore } from 'src/store'
+
+const store = useStore()
+const setScrollPosition = ({ verticalPosition }: { verticalPosition: number }) => {
+  store.commit('common/setScrollPosition', verticalPosition)
+}
 
 const leftDrawerOpen = ref(false)
 
@@ -90,7 +96,12 @@ const toggleDrawer = () => {
     </q-drawer>
 
     <q-page-container>
-      <router-view/>
+      <q-scroll-area
+        @scroll="setScrollPosition"
+        style="height: 100vh; width: 100vw;"
+      >
+        <router-view />
+      </q-scroll-area>
     </q-page-container>
   </q-layout>
 </template>
