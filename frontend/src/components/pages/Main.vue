@@ -2,14 +2,22 @@
 import GetStartedButton from 'components/common/GetStartedButton.vue'
 import BeeAnimation from 'components/animations/BeeAnimation.vue'
 import { ref, watch } from 'vue'
+import { Dimensions } from 'components/models'
 
-const logoContainerWidth = ref<number>(0)
+const logoContainerSize = ref<Dimensions>({ height: 0, width: 0 })
 
 const logoContainer = ref<HTMLElement|null>(null)
-watch(logoContainer, () => { if (!logoContainerWidth.value) { logoContainerWidth.value = (logoContainer.value as HTMLElement).clientWidth } })
+watch(logoContainer, () => {
+  if (!logoContainerSize.value) {
+    logoContainerSize.value = {
+      width: (logoContainer.value as HTMLElement).clientWidth,
+      height: (logoContainer.value as HTMLElement).clientHeight
+    }
+  }
+})
 
-const setLogoContainerWidth = ({ width }: { width: number }) => {
-  logoContainerWidth.value = width
+const setLogoContainerSize = ({ width, height }: Dimensions) => {
+  logoContainerSize.value = { width, height }
 }
 
 const pageHeight = () => {
@@ -33,10 +41,20 @@ const pageHeight = () => {
 
         <template v-slot:content>
           <div class="full-width full-height row justify-center" style="background-color: rgba(25, 25, 25, 0.92)">
-            <div class="row full-height col-12" style="max-width: 1200px">
-              <div class="col-xs-12 col-md-6 full-height justify-center content-center row">
+            <div
+              class="full-height col-12"
+              :class="[$q.screen.lt.md ? 'column q-pa-lg' : 'full-height row q-pa-xl']"
+              style="max-width: 1200px"
+            >
+              <div
+                class="col-xs-6 col-sm-4 col-md-6 justify-center row"
+                :class="[$q.screen.lt.md ? 'content-end q-pb-xl full-width' : 'content-center']"
+              >
                 <div class="text-accent">
-                  <h2 class="text-h3 text-weight-bold">A Faucet is a tool that provides a small amount of funds to start using a cryptocurrency.</h2>
+                  <h2
+                    class="text-h3 text-weight-bold"
+                    :class="[$q.screen.lt.md ? 'text-h5' : 'text-h3']"
+                  >A Faucet is a tool that provides a small amount of funds to start using a cryptocurrency.</h2>
                   <p class="text-subtitle1 text-weight-light">Digital asset for global payments.</p>
 
                   <GetStartedButton class="q-mt-lg"/>
@@ -44,12 +62,16 @@ const pageHeight = () => {
               </div>
               <div
                 ref="logoContainer"
-                class="col-xs-12 col-md-6 content-center justify-center row"
-                :class="{ 'order-first': $q.screen.lt.md}"
+                class="col-xs-6 col-sm-8 col-md-6 content-center justify-center row"
+                :class="[$q.screen.lt.md ? 'order-first content-end full-width' : null]"
               >
-                <BeeAnimation :key="Math.floor(logoContainerWidth / 150)" :width="logoContainerWidth" :height="logoContainerWidth" />
+                <BeeAnimation
+                  :key="Math.floor($q.screen.width / 150)"
+                  :width="$q.screen.lt.md ? logoContainerSize.height - 50 : logoContainerSize.width"
+                  :height="$q.screen.lt.md ? logoContainerSize.height - 50 : logoContainerSize.width"
+                />
 
-                <q-resize-observer @resize="setLogoContainerWidth" />
+                <q-resize-observer @resize="setLogoContainerSize" />
               </div>
             </div>
           </div>

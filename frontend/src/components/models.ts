@@ -3,3 +3,8 @@ export interface MenuItem {
   id: string;
   icon?: string;
 }
+
+export interface Dimensions {
+  width: number;
+  height: number;
+}
