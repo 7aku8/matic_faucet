@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import GetStartedButton from 'components/common/GetStartedButton.vue'
 import BeeAnimation from 'components/animations/BeeAnimation.vue'
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { Dimensions } from 'components/models'
 
-const logoContainerSize = ref<Dimensions>({ height: 0, width: 0 })
+const logoContainerSize = ref<Dimensions>({
+  height: 0,
+  width: 0
+})
 
-const logoContainer = ref<HTMLElement|null>(null)
+const logoContainer = ref<HTMLElement | null>(null)
 watch(logoContainer, () => {
   if (!logoContainerSize.value) {
     logoContainerSize.value = {
@@ -16,8 +19,24 @@ watch(logoContainer, () => {
   }
 })
 
-const setLogoContainerSize = ({ width, height }: Dimensions) => {
-  logoContainerSize.value = { width, height }
+const leftAnimation = ref<boolean>(false)
+const rightAnimation = ref<boolean>(false)
+
+onMounted(() => setTimeout(() => {
+  leftAnimation.value = true
+}, 300))
+onMounted(() => setTimeout(() => {
+  rightAnimation.value = true
+}, 350))
+
+const setLogoContainerSize = ({
+  width,
+  height
+}: Dimensions) => {
+  logoContainerSize.value = {
+    width,
+    height
+  }
 }
 
 const pageHeight = () => {
@@ -51,13 +70,25 @@ const pageHeight = () => {
                 :class="[$q.screen.lt.md ? 'content-end q-pb-xl full-width' : 'content-center']"
               >
                 <div class="text-accent">
-                  <h2
-                    class="text-h3 text-weight-bold"
-                    :class="[$q.screen.lt.md ? 'text-h5' : 'text-h3']"
-                  >A Faucet is a tool that provides a small amount of funds to start using a cryptocurrency.</h2>
-                  <p class="text-subtitle1 text-weight-light">Digital asset for global payments.</p>
+                  <transition-group
+                    appear
+                    enter-active-class="animated fadeInUp"
+                  >
+                    <h2
+                      v-if="leftAnimation"
+                      class="text-h3 text-weight-bold"
+                      :class="[$q.screen.lt.md ? 'text-h5' : 'text-h3']"
+                    >A Faucset is a tool that provides a small amount of funds to start using a cryptocurrency.</h2>
+                    <p
+                      v-if="leftAnimation"
+                      class="text-subtitle1 text-weight-light"
+                    >Digital asset for global payments.</p>
 
-                  <GetStartedButton class="q-mt-lg"/>
+                    <GetStartedButton
+                      v-if="leftAnimation"
+                      class="q-mt-lg"
+                    />
+                  </transition-group>
                 </div>
               </div>
               <div
@@ -65,13 +96,19 @@ const pageHeight = () => {
                 class="col-xs-6 col-sm-8 col-md-6 content-center justify-center row"
                 :class="[$q.screen.lt.md ? 'order-first content-end full-width' : null]"
               >
-                <BeeAnimation
-                  :key="Math.floor($q.screen.width / 150).toString() + logoContainerSize.width.toString()"
-                  :width="$q.screen.lt.md ? logoContainerSize.height - 50 : logoContainerSize.width"
-                  :height="$q.screen.lt.md ? logoContainerSize.height - 50 : logoContainerSize.width"
-                />
+                <transition
+                  appear
+                  enter-active-class="animated zoomIn"
+                >
+                  <BeeAnimation
+                    v-if="rightAnimation"
+                    :key="Math.floor($q.screen.width / 150).toString() + logoContainerSize.width.toString()"
+                    :width="$q.screen.lt.md ? logoContainerSize.height - 50 : logoContainerSize.width"
+                    :height="$q.screen.lt.md ? logoContainerSize.height - 50 : logoContainerSize.width"
+                  />
+                </transition>
 
-                <q-resize-observer @resize="setLogoContainerSize" />
+                <q-resize-observer @resize="setLogoContainerSize"/>
               </div>
             </div>
           </div>
