@@ -54,6 +54,7 @@ const scrolled = computed<boolean>(
             :key="item.name"
             :to="item.id"
             :label="item.name"
+            class="rounded-button"
           />
         </q-tabs>
 
