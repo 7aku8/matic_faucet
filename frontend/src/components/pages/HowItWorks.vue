@@ -20,6 +20,8 @@ const pageHeight = () => {
 
 <template>
   <q-page
+    id="how-it-works"
+
     :style-fn="pageHeight"
     class="bg-accent row items-center justify-evenly"
   >

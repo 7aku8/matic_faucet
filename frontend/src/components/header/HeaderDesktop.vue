@@ -2,7 +2,8 @@
 import { computed, toRefs, defineProps } from 'vue'
 import { useStore } from 'src/store'
 import GetStartedButton from 'components/common/GetStartedButton.vue'
-import { useQuasar } from 'quasar'
+import { useQuasar, scroll } from 'quasar'
+const { getScrollTarget, setVerticalScrollPosition } = scroll
 
 const props = defineProps({
   menuItems: {
@@ -27,6 +28,15 @@ const scrolled = computed<boolean>(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   () => store.getters['common/getScrollPosition'] > quasar.screen.height - headerHeight
 )
+
+const scrollTo = ({ id }: { id: string }) => {
+  const element = document.querySelector(id) as HTMLElement
+  const target = getScrollTarget(element)
+  const offset = element.offsetTop
+  const duration = 350
+
+  setVerticalScrollPosition(target, offset, duration)
+}
 </script>
 
 <template>
@@ -52,8 +62,10 @@ const scrolled = computed<boolean>(
           <q-route-tab
             v-for="item in menuItems"
             :key="item.name"
-            :to="item.id"
             :label="item.name"
+
+            @click="scrollTo({ id: '#how-it-works' } )"
+
             class="rounded-button"
           />
         </q-tabs>
