@@ -66,10 +66,13 @@ const pageHeight = () => {
               style="max-width: 1200px"
             >
               <div
-                class="col-xs-6 col-sm-4 col-md-6 justify-center row"
+                class="col-xs-5 col-sm-4 col-md-6 justify-center row"
                 :class="[$q.screen.lt.md ? 'content-end q-pb-xl full-width' : 'content-center']"
               >
-                <div class="text-accent">
+                <div
+                  class="text-accent"
+                  :class="[$q.screen.lt.md ? 'q-pb-lg' : null]"
+                >
                   <transition-group
                     appear
                     enter-active-class="animated fadeInUp"
@@ -93,7 +96,7 @@ const pageHeight = () => {
               </div>
               <div
                 ref="logoContainer"
-                class="col-xs-6 col-sm-8 col-md-6 content-center justify-center row"
+                class="col-xs-7 col-sm-8 col-md-6 content-center justify-center row"
                 :class="[$q.screen.lt.md ? 'order-first content-end full-width' : null]"
               >
                 <transition
