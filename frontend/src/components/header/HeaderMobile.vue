@@ -1,11 +1,20 @@
 <script lang="ts" setup>
 import { defineProps, computed } from 'vue'
 import { useStore } from 'src/store'
+import { useQuasar } from 'quasar'
 
 const store = useStore()
+const quasar = useQuasar()
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-const scrolled = computed<boolean>(() => store.getters['common/getScrollPosition'] > 100)
+const lightScrolled = computed<boolean>(
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  () => store.getters['common/getScrollPosition'] > quasar.screen.height / 2
+)
+
+const scrolled = computed<boolean>(
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  () => store.getters['common/getScrollPosition'] > quasar.screen.height - 75
+)
 
 const props = defineProps({
   toggleDrawer: {
@@ -17,7 +26,7 @@ const props = defineProps({
 
 <template>
   <q-header
-    :class="[scrolled ? 'nav-background' : 'bg-transparent']"
+    :class="[scrolled ? 'nav-background' : lightScrolled ? 'nav-light-background' : 'bg-transparent']"
     style="transition: background-color 250ms 200ms ease-out;"
   >
     <q-toolbar class="q-pl-lg q-pr-md q-py-sm">

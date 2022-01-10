@@ -5,11 +5,17 @@
   padding-top: 0 !important;
 }
 
-.q-focus-helper {
-  border-radius: 30px !important;
+.rounded-button {
+  &.q-focus-helper {
+    border-radius: 30px !important;
+  }
 }
 
 // custom colors
+.nav-light-background {
+  background-color: rgba($secondary, .2) !important;
+}
+
 .nav-background {
-  background-color: rgba($accent, .05) !important;
+  background-color: rgba($secondary, .85) !important;
 }

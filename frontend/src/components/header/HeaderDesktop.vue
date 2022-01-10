@@ -2,6 +2,7 @@
 import { computed, toRefs, defineProps } from 'vue'
 import { useStore } from 'src/store'
 import GetStartedButton from 'components/common/GetStartedButton.vue'
+import { useQuasar } from 'quasar'
 
 const props = defineProps({
   menuItems: {
@@ -13,15 +14,25 @@ const props = defineProps({
 const { menuItems } = toRefs(props)
 
 const store = useStore()
+const quasar = useQuasar()
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-const scrolled = computed<boolean>(() => store.getters['common/getScrollPosition'] > 150)
+const headerHeight = 106
+
+const lightScrolled = computed<boolean>(
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  () => store.getters['common/getScrollPosition'] > quasar.screen.height / 2 - headerHeight
+)
+
+const scrolled = computed<boolean>(
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  () => store.getters['common/getScrollPosition'] > quasar.screen.height - headerHeight
+)
 </script>
 
 <template>
   <q-header
     class="align-center justify-center row"
-    :class="[scrolled ? 'nav-background' : 'bg-transparent']"
+    :class="[scrolled ? 'nav-background' : lightScrolled ? 'nav-light-background' : 'bg-transparent']"
     style="transition: background-color 250ms 200ms ease-out;"
   >
     <div style="max-width: 1250px" class="full-width">
