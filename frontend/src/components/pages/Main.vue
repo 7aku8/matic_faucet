@@ -47,7 +47,7 @@ const pageHeight = () => {
 <template>
   <q-page
     :style-fn="pageHeight"
-    class="bg-secondary row items-center justify-evenly"
+    class="row items-center justify-evenly"
   >
     <div class="full-width full-height">
       <q-parallax
