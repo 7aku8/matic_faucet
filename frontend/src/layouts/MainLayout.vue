@@ -4,6 +4,7 @@ import HeaderDesktop from 'components/header/HeaderDesktop.vue'
 import HeaderMobile from 'components/header/HeaderMobile.vue'
 import { useStore } from 'src/store'
 import { MenuItem } from 'components/models'
+import FooterSocial from 'components/footer/FooterSocial.vue'
 import { useScrollTo } from 'app/hooks/useScrollTo'
 
 const { scrollTo } = useScrollTo()
@@ -101,6 +102,8 @@ const toggleDrawer = () => {
         style="height: 100vh; width: 100vw;"
       >
         <router-view/>
+
+        <FooterSocial />
       </q-scroll-area>
     </q-page-container>
   </q-layout>
