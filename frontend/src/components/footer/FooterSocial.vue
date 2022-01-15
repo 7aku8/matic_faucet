@@ -23,7 +23,7 @@ const resources: Link[] = [
   >
     <q-parallax
       :speed="0.8"
-      style="height: 400px;"
+      :style="$q.screen.lt.md ? 'height: 550px;' : 'height: 400px;'"
     >
       <template v-slot:media>
         <img src="../../assets/background.png" alt="Background waves" style="height: 200vh;"/>
@@ -42,12 +42,12 @@ const resources: Link[] = [
               class="flex full-width row q-my-xl q-gutter-lg"
             >
               <div
-                class="col-4"
+                class="col-xs-12 col-md-4"
               >
                 <h1 class="text-h4 text-primary text-weight-thin q-my-sm">Matic faucet</h1>
               </div>
               <div
-                class="col-4 column"
+                class="col-xs-6 col-md-4 column"
               >
                 <h6 class="text-h6 q-my-none">Useful links</h6>
                 <q-list dark dense padding>
@@ -67,7 +67,7 @@ const resources: Link[] = [
                 </q-list>
               </div>
               <div
-                class="col-3"
+                class="col-xs-4 col-md-3"
               >
                 <h6 class="text-h6 q-my-none">Resources</h6>
                 <q-list dark dense padding>
@@ -90,8 +90,11 @@ const resources: Link[] = [
 
             <q-separator dark />
 
-            <div class="flex full-width justify-between q-my-lg">
-              <div class="flex row items-center">
+            <div
+              class="flex full-width q-my-lg q-px-lg"
+              :class="[$q.screen.lt.md ? 'column' : 'row']"
+            >
+              <div class="col-6 flex row items-center">
                 <p class="text-body1 q-ma-none text-accent">© 2022 Matic Faucet</p>
                 <q-btn outline rounded size="sm" no-caps class="q-ml-lg" color="primary">
                   <template v-slot:default name="default">
@@ -100,7 +103,10 @@ const resources: Link[] = [
                   </template>
                 </q-btn>
               </div>
-              <div class="q-gutter-md">
+              <div
+                class="col-6 q-gutter-xs-x-xl flex"
+                :class="[$q.screen.lt.md ? 'order-first' : 'justify-end']"
+              >
                 <q-btn outline round color="primary" icon="lab la-linkedin-in"/>
                 <q-btn outline round color="primary" icon="lab la-github"/>
                 <q-btn outline round color="primary" icon="lab la-facebook-f"/>
