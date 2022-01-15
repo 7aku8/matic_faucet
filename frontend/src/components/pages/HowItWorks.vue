@@ -14,7 +14,10 @@ const onRightIntersection = ({ isIntersecting }: { isIntersecting: boolean }) =>
 }
 
 const pageHeight = () => {
-  return { height: '100vh' }
+  return {
+    height: '100%',
+    minHeight: '100vh'
+  }
 }
 </script>
 
@@ -31,7 +34,8 @@ const pageHeight = () => {
       style="max-width: 1200px"
     >
       <div
-        class="col-md-6 row content-center justify-center q-pr-xl"
+        v-if="$q.screen.gt.sm"
+        class="col-6 row content-center justify-center q-pr-xl"
 
         v-intersection.once="{ handler: onLeftIntersection, cfg: { threshold: 0.5 } }"
       >
@@ -42,7 +46,10 @@ const pageHeight = () => {
           <q-img v-if="leftTransition" src="~assets/how_does_it_work.svg"/>
         </transition>
       </div>
-      <div class="col-md-6 row content-center justify-center q-pl-xl">
+      <div
+        class="col-xs-12 col-md-6 row content-center justify-center q-pl-xs-none q-pl-md-xl"
+        :class="[$q.screen.lt.md ? 'q-py-xl q-px-md' : null]"
+      >
         <div
           v-intersection.once="{ handler: onRightIntersection, cfg: { threshold: 0.5 } }"
         >
@@ -102,7 +109,11 @@ const pageHeight = () => {
               </q-item>
             </q-list>
 
-            <p v-if="rightTransition" class="text-subtitle2 q-pt-lg">
+            <p
+              v-if="rightTransition"
+              class="text-subtitle2 q-pt-lg q-py-xs-xl q-py-md-none"
+              :class="[$q.screen.lt.md ? 'q-pt-xl q-pb-sm' : null]"
+            >
               Developers around the project work hard to create outstanding experience for our community! All coins in
               our network are free to get, you can request it on this website! Download HMC Wallet and get HmmCoins for
               free!

@@ -4,6 +4,9 @@ import HeaderDesktop from 'components/header/HeaderDesktop.vue'
 import HeaderMobile from 'components/header/HeaderMobile.vue'
 import { useStore } from 'src/store'
 import { MenuItem } from 'components/models'
+import { useScrollTo } from 'app/hooks/useScrollTo'
+
+const { scrollTo } = useScrollTo()
 
 const linksList: MenuItem[] = [
   {
@@ -13,7 +16,7 @@ const linksList: MenuItem[] = [
   },
   {
     name: 'How it works',
-    id: 'github.com/quasarframework',
+    id: '#how-it-works',
     icon: 'code'
   },
   {
@@ -76,9 +79,10 @@ const toggleDrawer = () => {
           <q-route-tab
             v-for="link in essentialLinks"
             :key="link.name"
-            :to="link.id"
             style="justify-content: start;"
             class="q-px-md q-my-sm"
+
+            @click="scrollTo({ id: link.id }); leftDrawerOpen = false;"
           >
             <span class="q-pl-md">{{ link.name }}</span>
           </q-route-tab>
