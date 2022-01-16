@@ -12,18 +12,13 @@ const { scrollTo } = useScrollTo()
 const linksList: MenuItem[] = [
   {
     name: 'Faucet',
-    id: '#',
-    icon: 'school'
+    id: '#faucet',
+    icon: ''
   },
   {
     name: 'How it works',
     id: '#how-it-works',
-    icon: 'code'
-  },
-  {
-    name: 'About',
-    id: '',
-    icon: 'wallet'
+    icon: ''
   }
 ]
 

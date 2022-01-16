@@ -46,6 +46,8 @@ const pageHeight = () => {
 
 <template>
   <q-page
+    id="faucet"
+
     :style-fn="pageHeight"
     class="row items-center justify-evenly"
   >

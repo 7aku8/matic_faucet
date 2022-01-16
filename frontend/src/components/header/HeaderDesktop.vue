@@ -64,7 +64,7 @@ const scrollTo = ({ id }: { id: string }) => {
             :key="item.name"
             :label="item.name"
 
-            @click="scrollTo({ id: '#how-it-works' } )"
+            @click="scrollTo({ id: item.id } )"
 
             class="rounded-button"
           />
