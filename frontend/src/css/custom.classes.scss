@@ -11,6 +11,10 @@
   }
 }
 
+.active-desktop {
+  border-bottom: 20px solid red;
+}
+
 // custom colors
 .nav-light-background {
   background-color: rgba($secondary, .2) !important;

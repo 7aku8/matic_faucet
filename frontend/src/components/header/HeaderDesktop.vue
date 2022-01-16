@@ -37,6 +37,9 @@ const scrollTo = ({ id }: { id: string }) => {
 
   setVerticalScrollPosition(target, offset, duration)
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
+const activeTab = computed<string>(() => store.getters['common/getVisiblePage'])
 </script>
 
 <template>
@@ -65,8 +68,8 @@ const scrollTo = ({ id }: { id: string }) => {
             :label="item.name"
 
             @click="scrollTo({ id: item.id } )"
-
             class="rounded-button"
+            :class="[activeTab === item.id ? 'active-desktop' : null]"
           />
         </q-tabs>
 

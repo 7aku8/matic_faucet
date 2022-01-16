@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 import { ref } from 'vue'
 
 const leftTransition = ref<boolean>(false)
@@ -61,7 +60,8 @@ const pageHeight = () => {
               How does the faucet work?
             </h2>
             <p v-if="rightTransition" class="text-subtitle1 text-weight-light">
-              A crypto faucet is an app or a website that distributes small amounts of cryptocurrencies as a reward for
+              A crypto faucet is an app or a website that distributes small amounts of cryptocurrencies as a reward
+              for
               completing easy tasks.
             </p>
 
@@ -115,7 +115,8 @@ const pageHeight = () => {
               :class="[$q.screen.lt.md ? 'q-pt-xl q-pb-sm' : null]"
             >
               Developers around the project work hard to create outstanding experience for our community! All coins in
-              our network are free to get, you can request it on this website! Download HMC Wallet and get HmmCoins for
+              our network are free to get, you can request it on this website! Download HMC Wallet and get HmmCoins
+              for
               free!
             </p>
 
