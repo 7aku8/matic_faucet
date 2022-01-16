@@ -23,7 +23,7 @@ const resources: Link[] = [
   >
     <q-parallax
       :speed="0.8"
-      :style="$q.screen.lt.md ? 'height: 550px;' : 'height: 400px;'"
+      :style="$q.screen.lt.md ? 'height: 570px;' : 'height: 400px;'"
     >
       <template v-slot:media>
         <img src="../../assets/background.png" alt="Background waves" style="height: 200vh;"/>
@@ -94,9 +94,17 @@ const resources: Link[] = [
               class="flex full-width q-my-lg q-px-lg"
               :class="[$q.screen.lt.md ? 'column' : 'row']"
             >
-              <div class="col-6 flex row items-center">
-                <p class="text-body1 q-ma-none text-accent">© 2022 Matic Faucet</p>
-                <q-btn outline rounded size="sm" no-caps class="q-ml-lg" color="primary">
+              <div
+                class="col-7 flex row items-center"
+                :class="[$q.screen.lt.md ? 'q-pt-md' : null]"
+              >
+                <p
+                  class="text-body1 q-ma-none text-accent q-mr-lg"
+                >© 2022 Matic Faucet</p>
+                <q-btn
+                  outline rounded size="sm" no-caps color="primary"
+                  :class="[$q.screen.lt.md ? null : 'q-ml-lg']"
+                >
                   <template v-slot:default name="default">
                     <q-icon name="las la-frog"/>
                     <p class="text-body2 q-ma-none q-pl-sm">Add Polygon Network</p>
@@ -104,8 +112,8 @@ const resources: Link[] = [
                 </q-btn>
               </div>
               <div
-                class="col-6 q-gutter-xs-x-xl flex"
-                :class="[$q.screen.lt.md ? 'order-first' : 'justify-end']"
+                class="col-5 flex"
+                :class="[$q.screen.lt.md ? 'order-first justify-between q-px-xl q-pb-md' : 'justify-end q-gutter-lg']"
               >
                 <q-btn outline round color="primary" icon="lab la-linkedin-in"/>
                 <q-btn outline round color="primary" icon="lab la-github"/>
